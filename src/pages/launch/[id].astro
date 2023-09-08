@@ -1,0 +1,30 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getLaunchById, getLatestLaunches } from '../../services/spacex.js';
+const { id } = Astro.params;
+
+let launch;
+if (id) {
+	launch = await getLaunchById({ id });
+}
+
+export async function getStaticPaths() {
+	const launches = await getLatestLaunches();
+	return launches.map((launch) => ({
+		params: { id: launch.id },
+	}))
+}
+---
+
+<Layout title={`Launch ${id}`}>
+	<article>
+		{launch ? (
+			<>
+				<h1>{launch.name}</h1>
+				<p>{launch.details}</p>
+			</>
+		) : (
+			<p>Launch not found</p>
+		)}
+	</article>
+</Layout>
