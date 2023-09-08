@@ -1,4 +1,5 @@
 ---
+import { Counter } from './Counter';
 import HeaderButton from './HeaderButton.astro';
 ---
 
@@ -14,6 +15,7 @@ import HeaderButton from './HeaderButton.astro';
 	<nav
 		class="flex flex-col items-center justify-between w-full text-center md:flex-row"
 	>
+		<Counter transition:persist client:visible/>
 		<HeaderButton href="/">
 			<svg
 				slot="before"
@@ -76,6 +78,6 @@ import HeaderButton from './HeaderButton.astro';
 				<path d="M22 19l-3 3l-3 -3"></path>
 			</svg>Oldest launches
 		</HeaderButton>
-		<HeaderButton></HeaderButton>
+		<HeaderButton />
 	</nav>
 </header>
